@@ -66,6 +66,10 @@ SELECT last_name,
  WHERE (job_id = 'SA_REP' OR job_id = 'ST_CLERK')
    AND salary NOT IN (2500, 3500, 7000);
    
+   
+   
+   
+   
 -- 13. 커미션 비율(commission_pct)이 20%인 모든 사원의 이름, 급여 및 커미션을 표시하도록 
 --     명령문을 작성하여 실행하시오.
 SELECT last_name,
