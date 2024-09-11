@@ -1,0 +1,10 @@
+CREATE USER hr
+IDENTIFIED BY hr
+DEFAULT TABLESPACE USERS
+TEMPORARY TABLESPACE temp;
+
+grant connect, resource to hr; -- hr계정에 권한 부여
+
+ALTER USER hr
+IDENTIFIED BY hr
+ACCOUNT UNLOCK;
