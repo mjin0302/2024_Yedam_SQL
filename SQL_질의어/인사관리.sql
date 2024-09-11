@@ -75,7 +75,8 @@ SELECT last_name,
 SELECT last_name
   FROM employees
  WHERE last_name BETWEEN 'King' AND 'Smith';
- 
+
+-- manager_id가 100, 101, 201이 포함된 데이터
 SELECT employee_id,
        last_name,
        salary,
@@ -96,4 +97,46 @@ SELECT first_name
 SELECT last_name,
        hire_date
   FROM employees
- WHERE first_name LIKE 's%';
+ WHERE hire_date LIKE '06%';
+ 
+SELECT last_name
+  FROM employees
+ WHERE last_name LIKE '_o%';
+ 
+-- ESCAPE _를 문자로 인식하기 위해 
+SELECT employee_id,
+       last_name,
+       job_id
+  FROM employees
+ WHERE job_id LIKE '%3_%'  ESCAPE '3';
+ 
+SELECT last_name,
+       manager_id
+  FROM employees
+ WHERE manager_id IS NULL;
+
+SELECT employee_id,
+       last_name,
+       job_id,
+       salary
+  FROM employees
+ WHERE salary >= 10000 AND job_id LIKE '%MAN%';
+ 
+ SELECT employee_id,
+       last_name,
+       job_id,
+       salary
+  FROM employees
+ WHERE salary >= 10000 OR job_id LIKE '%MAN%';
+
+SELECT last_name,
+       job_id,
+       salary
+  FROM employees
+ WHERE job_id = 'SA_REP' OR job_id = 'AD_PRES' AND salary > 15000;
+ 
+SELECT last_name,
+       job_id,
+       salary
+  FROM employees
+ WHERE (job_id = 'SA_REP' OR job_id = 'AD_PRES') AND salary > 15000;
