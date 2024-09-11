@@ -33,6 +33,7 @@ SELECT last_name AS Employee,
  WHERE (salary BETWEEN 5000 AND 12000) AND (department_id = 20 OR department_id = 50);
  
 -- 7. 2004년에 입사한 모든 사원의 이름과 입사일을 표시하시오.
+-- 다시 확인해보기!!
 SELECT last_name,
        hire_date
   FROM employees
@@ -50,6 +51,7 @@ SELECT last_name
  WHERE last_name LIKE '__a%';
  
 -- 11. 이름에 a와 e가 있는 모든 사원의 이름을 표시하시오.
+-- 다시 확인해보기!!
 SELECT last_name
   FROM employees
  WHERE last_name LIKE '%a%'

@@ -31,6 +31,5 @@ SELECT department_id AS "Emp #",
 /* 5. 업무 ID(job_id)와 이름(last_name)을 연결한 다음 
       쉼표 및 공백으로 구분하여 표시하고 
       열 이름을 Employee and Title로 지정하시오. */
-      
 SELECT job_id || ' , ' || last_name AS "Employee and Title"
   FROM employees;
