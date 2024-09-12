@@ -228,3 +228,12 @@ SELECT   last_name,
          END) "REVISED_SALARY"
   FROM   employees
 ORDER BY last_name;
+-- DECODE
+SELECT last_name,
+       job_id,
+       salary,
+       DECODE(job_id, 'IT_PROG' ,  1.10 * salary,
+                      'ST_CLERK', 1.10 * salary,
+                      'SA_REP'  , 1.10 * salary,
+                                  salary)"REVISED_SALARY"
+  FROM employees;
