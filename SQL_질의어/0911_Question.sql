@@ -1,3 +1,39 @@
+-- 1. DEPARTMENTS 테이블의 모든 데이터를 조회하시오.
+  DESC departments;
+SELECT *
+  FROM departments;
+
+/* 2. EMPLOYEES 테이블에서 사원 번호가 가장 앞에 오고 
+      이어서 각 사원의 이름(last_name), 
+      업무 코드(job_id), 
+      입사일(hire_date)이 오도록 질의를 작성하시오. 
+      HIRE_DATE 열에 STARTDATE라는 별칭을 지정하시오. */
+  DESC employees;
+SELECT department_id,
+       last_name,
+       job_id,
+       hire_date AS "STARTDATE"
+  FROM employees;
+
+-- 3. EMPLOYEES 테이블의 업무 코드(job_id)를 중복되지 않게 표시하는 질의를 작성하시오.
+SELECT DISTINCT job_id
+  FROM employees;
+
+/* 4. 2번의 명령문을 복사하시오. 
+      머리글을 각각 Emp #, Employee, Job 및 Hire Date로 명명한 다음 
+      질의를 다시 실행하시오. */
+SELECT department_id AS "Emp #",
+       last_name AS Employee,
+       job_id AS Job,
+       hire_date AS "Hire Date"
+  FROM employees;
+
+/* 5. 업무 ID(job_id)와 이름(last_name)을 연결한 다음 
+      쉼표 및 공백으로 구분하여 표시하고 
+      열 이름을 Employee and Title로 지정하시오. */
+SELECT job_id || ' , ' || last_name AS "Employee and Title"
+  FROM employees;
+-- ----------------------------------------------------------------------------------------------------
 select * from employees;
 -- 1. 급여가 12,000를 넘는 사원의 이름과 급여를 표시하는 질의를 실행하시오.
 SELECT last_name,
@@ -65,10 +101,6 @@ SELECT last_name,
   FROM employees
  WHERE (job_id = 'SA_REP' OR job_id = 'ST_CLERK')
    AND salary NOT IN (2500, 3500, 7000);
-   
-   
-   
-   
    
 -- 13. 커미션 비율(commission_pct)이 20%인 모든 사원의 이름, 급여 및 커미션을 표시하도록 
 --     명령문을 작성하여 실행하시오.
