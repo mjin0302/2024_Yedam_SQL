@@ -106,6 +106,15 @@ SELECT   department_id,
 FROM     employees
 GROUP BY department_id;
 
+-- SUB QUERY (서브쿼리)
+-- 176번 사원보다 급여 많이 받는 사원들 출력
+-- 제한적인 정보를 가지고 특정 정보를 가지고오기 위해 필요함
+SELECT *
+FROM   employees
+WHERE  salary > (SELECT salary 
+                 FROM   employees
+                 WHERE  employee_id = 176);
+
 SELECT * FROM job_grades;
 CREATE TABLE job_grades (
   grade_level VARCHAR2(3),
