@@ -31,7 +31,7 @@ SELECT AVG(NVL(commission_pct, 0))
 FROM   employees;
 
 SELECT   department_id,
-         AVG(NVL(salary, 0))
+       AVG(NVL(salary, 0))
 FROM     employees
 GROUP BY department_id;
 
