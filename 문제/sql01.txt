@@ -1,0 +1,97 @@
+select *
+from departments;
+
+select department_id,
+       department_name,
+       manager_id,
+       location_id
+from departments;
+
+select department_id,
+       location_id
+from departments;
+
+select location_id,
+       department_id
+from departments;
+
+select location_id,
+       location_id
+from departments;
+
+select last_name,
+       salary,
+       salary+300
+from employees;
+
+select last_name,
+       salary,
+       12*salary+100
+from employees;
+
+select last_name,
+       salary,
+       12*(salary+100)
+from employees;
+
+select last_name,
+       job_id,
+       salary,
+       commission_pct
+from employees;
+
+select last_name,
+       commission_pct,
+       12*salary*NVL(commission_pct,0)
+from employees;
+
+select last_name as name,
+       commission_pct comm -- as를 붙이는것보다 조금 느림
+from employees;
+
+select last_name "Name",
+       salary*12 "Annual Salary"
+from employees;
+
+select first_name||last_name||job_id as "Employees" -- ||기호를 활용하여 컬럼값 붙임
+from employees;
+
+select last_name || ' is a ' || job_id || 3 as "Employees Details" --문자는 홑따옴표, 숫자는 따옴표 필요 X
+from employees;
+
+select distinct department_id --중복제거 후 하나만 출력
+from employees;
+
+select distinct department_id, --컬럼이 두개이상일 경우 완전한 중복제거 불가
+       job_id
+from employees;
+
+desc employees;
+
+/*------------sql 복습문제--------------*/
+
+--1. DEPARTMENTS 테이블의 모든 데이터를 조회하시오.
+select * 
+from departments;
+
+--2. EMPLOYEES 테이블에서 사원 번호가 가장 앞에 오고 이어서 각 사원의 이름(last_name), 업무 코드(job_id), 입사일(hire_date)이 오도록 질의를 작성하시오. HIRE_DATE 열에 STARTDATE라는 별칭을 지정하시오. 
+select employee_id,
+       last_name,
+       job_id,
+       hire_date as startdate
+from employees;
+
+--3. EMPLOYEES 테이블의 업무 코드(job_id)를 중복되지 않게 표시하는 질의를 작성하시오.
+select distinct job_id
+from employees;
+
+--4. 2번의 명령문을 복사하시오. 머리글을 각각 Emp #, Employee, Job 및 Hire Date로 명명한 다음 질의를 다시 실행하시오.
+select employee_id as "Emp #",
+       last_name as Employee,
+       job_id as job,
+       hire_date as "Hire Date"
+from employees;
+
+--5. 업무 ID(job_id)와 이름(last_name)을 연결한 다음 쉼표 및 공백으로 구분하여 표시하고 열 이름을 Employee and Title로 지정하시오.
+select job_id||', '||last_name as "Employee and Title"
+from employees;
