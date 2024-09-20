@@ -50,3 +50,19 @@ INTERSECT
 SELECT employee_id, 
        job_id
 FROM   job_history;
+
+#include <stdio.h>
+ 
+int main()
+{ 
+       int sum = 0;
+       int i = 329;
+       do
+       {
+              sum = 999 % i;
+              i++
+       } while(sum != 0);
+
+       printf("%d", i);
+       return 0;
+}
