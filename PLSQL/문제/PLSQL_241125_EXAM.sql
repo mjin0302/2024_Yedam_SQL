@@ -284,11 +284,11 @@ END;
 *****     : 5줄, * 5개 출력
 */
 BEGIN
-   FOR idx IN 1 .. 5 LOOP
-      FOR jdx IN 1 .. idx LOOP
+   FOR idx IN 1 .. 5 LOOP  -- LINE을 제어, 1 ~ 5
+      FOR jdx IN 1 .. idx LOOP -- 각 LINE마다 출력되는 '*'제어, LINE= 최대값
          DBMS_OUTPUT.PUT('*');
-      END LOOP;
-      DBMS_OUTPUT.PUT_LINE('');
+      END LOOP; -- 라인이 종료됨을 의미
+      DBMS_OUTPUT.PUT_LINE(''); -- 라인 변경
   END LOOP;
 END;
 /
