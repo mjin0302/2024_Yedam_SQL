@@ -321,3 +321,35 @@ BEGIN
    END LOOP;
 END;
 /
+
+BEGIN
+   FOR dan IN 1 .. 9 LOOP -- 단 반복   
+         FOR num IN 2 .. 9 LOOP -- 곱하는 수 반복
+            DBMS_OUTPUT.PUT(num || ' * ' || dan ||' = ' || (dan * num) || '   ');
+         END LOOP;
+         DBMS_OUTPUT.PUT_LINE(''); -- DBMS는 Library
+   END LOOP;
+END;
+/
+
+       
+-- 9. 구구단 1~9단까지 출력되도록 하시오(단, 홀수단 출력)
+BEGIN
+   FOR dan IN 1 .. 9 LOOP -- 단 반복   
+         FOR num IN 1 .. 9 LOOP -- 곱하는 수 반복
+          /*  IF MOD(num, 2) = 0 THEN -- 짝수 일 때 continue
+               CONTINUE; -- 진행하지 않은 상태로 다음 조건으로 넘어감
+            END IF; */
+            CONTINUE WHEN MOD(dan, 2) = 0;  
+            DBMS_OUTPUT.PUT(num || ' * ' || dan ||' = ' || (dan * num) || '   ');
+         END LOOP;
+         DBMS_OUTPUT.PUT_LINE(''); -- DBMS는 Library
+   END LOOP;
+END;
+/
+
+
+
+
+
+
