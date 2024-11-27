@@ -159,10 +159,6 @@ BEGIN
 END;
 /
 
-
-
-
-
 DECLARE
     -- 1. 커서 정의
     -- 데이터가 없어도 오류나지않음
@@ -203,3 +199,55 @@ BEGIN
     CLOSE emp_of_dept_cursor;
 END;
 /
+
+-- DBMS_OUTPIT, PUT_LINE 프로시저를 실행하기 위한 설정 변경
+SET SERVEROUTPUT ON;
+
+-- ==========================================================================================
+-- 커서 FOR LOOP : 명시적 커서를 사용하는 단축방법
+-- 1) 문법
+DECLARE
+   CURSOR 커서명 IS
+      SELECT문;
+BEGIN
+   FOR 임시변수(레코드타입) IN 커서명 LOOP -- 암시적으로 OPEN과 FETCH
+       -- 커서에 데이터가 존재하는 경우 수행하는 코드
+   END LOOP; -- 암시적으로 CLOSE
+END;
+/
+
+-- 2) 적용
+DECLARE
+   CURSOR emp_cursor IS
+      SELECT employee_id, last_name, salary
+      FROM   employees;
+BEGIN
+   FOR emp_rec IN emp_cursor LOOP
+      DBMS_OUTPUT.PUT(emp_cursor%ROWCOUNT || ' ');
+      DBMS_OUTPUT.PUT(emp_rec.employee_id);
+      DBMS_OUTPUT.PUT(', ' || emp_rec.last_name);
+      DBMS_OUTPUT.PUT_LINE(', ' || emp_rec.salary);
+   END LOOP;
+END;
+/
+
+-- 부서번호를 입력받아 해당 부서에 소속된 사원정보(사원번호, 이름, 급여)를 출력하세요.
+-- 부서번호 0 : 커서의 데이터가 없음
+-- 부서번호 50 : 커서의 데이터가 존재함
+DECLARE
+   CURSOR emp_dept_cursor IS
+      SELECT employee_id eid, last_name ename, salary sal
+      FROM   employees
+      WHERE  department_id = &부서번호;
+BEGIN
+   FOR emp_rec IN emp_dept_cursor LOOP
+       DBMS_OUTPUT.PUT(emp_dept_cursor%ROWCOUNT || ' ');
+       DBMS_OUTPUT.PUT(emp_rec.eid);
+       DBMS_OUTPUT.PUT(', ' || emp_rec.ename);
+       DBMS_OUTPUT.PUT_LINE(', ' || emp_rec.sal);
+   END LOOP;
+   DBMS_OUTPUT.PUT_LINE('총 데이터 갯수 : ' || emp_dept_cursor%ROWCOUNT); -- 커서가 종료되고 난 시점이라서 에러가 뜬다 : ORA-01001: invalid cursor
+END;
+/
+
+-- 커서 FOR LOOP 문의 경우 명시적 커서의 데이터를 보장할 수 있을때만 사용

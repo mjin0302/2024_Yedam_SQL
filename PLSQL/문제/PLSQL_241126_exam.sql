@@ -108,7 +108,7 @@ DECLARE
    v_dept_name departments.department_name%TYPE;
    
 BEGIN
-   OPEN INTO emp_in_dept_cursor;
+   OPEN emp_in_dept_cursor;
    
    LOOP
       FETCH emp_in_dept_cursor INTO v_ename, v_hdate, v_dept_name;
@@ -124,27 +124,75 @@ DECLARE
    CURSOR emp_of_dept_sal_cursor IS
       SELECT last_name,
              salary,
-             commission_pct
+             (salary * 12 + (salary * NVL(commission_pct, 0) * 12 ))
       FROM   employees
       WHERE  department_id = &부서번호;
    
    v_name      employees.last_name%TYPE;
    v_sal       employees.salary%TYPE;
-   v_commipct  NUMBER(5, 2);
+   v_yearsal   v_sal%TYPE;
 BEGIN
    OPEN emp_of_dept_sal_cursor;
    
    LOOP
       -- 3. 데이터 인출
-      FETCH emp_of_dept_sal_cursor INTO v_name, v_sal, v_commipct;
+      FETCH emp_of_dept_sal_cursor INTO v_name, v_sal, v_yearsal;
       
-      DBMS_OUTPUT.PUT_LINE(v_name ||  ', ' ||  v_sal ||  ', ' || (v_sal * 12 + (v_sal * NVL(v_commipct, 0) * 12 )));
+      DBMS_OUTPUT.PUT_LINE(v_name ||  ', ' ||  v_sal ||  ', ' || v_yearsal);
       EXIT WHEN emp_of_dept_sal_cursor%NOTFOUND;
    END LOOP ;
 END;
 /     
 
+-- 3-1)
+DECLARE
+   CURSOR emp_in_dept_cursor IS
+      SELECT last_name,
+             salary,
+             commission_pct
+      FROM   employees
+      WHERE  department_id = &부서번호;
+   
+   v_emp_rec emp_in_dept_cursor%ROWTYPE;
+   v_year NUMBER(10, 2);
+BEGIN
+   OPEN emp_in_dept_cursor;
+   
+   LOOP
+      -- 3. 데이터 인출
+      FETCH emp_in_dept_cursor INTO v_emp_rec;
+      EXIT WHEN emp_in_dept_cursor%NOTFOUND;
       
+      v_year := (v_emp_rec.salary*12+(v_emp_rec.salary*NVL(v_emp_rec.commission_pct, 0)*12));
       
+      DBMS_OUTPUT.PUT(v_emp_rec.last_name);
+      DBMS_OUTPUT.PUT(', ' ||  v_emp_rec.salary);
+      DBMS_OUTPUT.PUT_LINE(', ' || v_year);
+   END LOOP ;
+END;
+/     
+      
+DECLARE
+    CURSOR emp_in_dept_cursor IS
+        SELECT last_name ename, salary sal, (salary*12+(salary*nvl(commission_pct,0)*12)) as year
+        FROM employees
+        WHERE department_id = &부서번호;
+        
+    v_emp_rec emp_in_dept_cursor%ROWTYPE;
+BEGIN
+    OPEN emp_in_dept_cursor;
+    
+    LOOP
+        FETCH emp_in_dept_cursor INTO v_emp_rec;
+        EXIT WHEN emp_in_dept_cursor%NOTFOUND;
+        
+        DBMS_OUTPUT.PUT(v_emp_rec.ename);
+        DBMS_OUTPUT.PUT(', ' || v_emp_rec.sal);
+        DBMS_OUTPUT.PUT_LINE(', ' || v_emp_rec.year);        
+    END LOOP;
+    
+    CLOSE emp_in_dept_cursor;
+END;
+/
       
       
