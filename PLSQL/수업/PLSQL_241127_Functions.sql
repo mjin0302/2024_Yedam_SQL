@@ -1,2 +1,0 @@
--- DBMS_OUTPIT, PUT_LINE 프로시저를 실행하기 위한 설정 변경
-SET SERVEROUTPUT ON;
